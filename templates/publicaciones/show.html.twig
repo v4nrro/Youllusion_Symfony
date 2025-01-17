@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Publicaciones{% endblock %}
+
+{% block body %}
+    <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
+		<div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
+			<h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Detalle</h1>
+		</div>
+	</div>
+
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-sm-5">
+
+                <!-- Imagen -->
+                <img class="img-fluid mb-3 mb-sm-0" width="300px" src="{{ publicacione.getUrlSubidas() }}" alt="">
+
+            </div>
+
+            <div class="col-sm-7">
+
+                <!-- Título -->
+                <h4>{{ publicacione.titulo }}</h4>
+
+                <!-- Descripción -->
+                <p class="m-0">{{ publicacione.descripcion }}</p>
+
+                <!-- Borrar evento o editar si es mio -->
+                <div class="botones-tabla">
+                    <a href="{{ path('app_publicaciones_edit', {'id': publicacione.id}) }}" class="btn btn-primary font-weight-bold">Editar</a>
+                    {{ include('publicaciones/_delete_form.html.twig') }}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <a href="{{ path('app_publicaciones_index') }}" class="btn btn-primary font-weight-bold m-4" >Volver</a>
+
+ {% endblock %}

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Imagen;
 use App\Entity\Asociado;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Repository\PublicacionesRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,11 +13,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ProyectoController extends AbstractController
 {
     #[Route('/', name: 'sym_index')]
-    public function index(ManagerRegistry $doctrine) : Response
+    public function index(PublicacionesRepository $publicacionesRepository) : Response
     {
-        // $publicaciones;
+        $publicaciones = $publicacionesRepository->findAll();
+
+        shuffle($publicaciones);
+
+        array_slice($publicaciones, 0, 4);
 
         return $this->render('index.view.html.twig', [
+           'publicaciones' => $publicaciones
         ]);
     }
 

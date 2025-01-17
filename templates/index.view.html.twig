@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
     <!-- Carousel Start -->
     <div class="container-fluid p-0 mb-5">
         <div id="blog-carousel" class="carousel slide overlay-bottom" data-ride="carousel">
@@ -39,12 +40,27 @@
                 <h1 class="display-4">Elegido para tí</h1>
             </div>
             <div class="row">
-                <?php 
-                    shuffle($publicaciones);
-                    
-                    require_once __DIR__ . "/index-publicaciones.part.php"
-                    
-                ?>
+                {% for publicacion in publicaciones %}
+                    <div class="col-lg-6 mb-5 ">
+                        <div class="row align-items-center">
+                           
+                            <!-- Imagen -->
+                            <div class="col-sm-5">
+                                <img class="img-fluid mb-3 mb-sm-0" src="{{publicacion.getUrlSubidas()}}" alt="" width="300px">
+                            </div>
+                            
+                            <div class="col-sm-7">
+
+                            <!-- Título -->
+                            <h4>{{publicacion.titulo}}</h4>
+
+                            <!-- Descripción -->
+                            <p class="m-0">{{publicacion.descripcion}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+				{% endfor %}
             </div>
         </div>
     </div>
@@ -102,4 +118,5 @@
         </div>
     </div>
 <!-- Testimonial End -->
+
 {% endblock %}
