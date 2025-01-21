@@ -26,17 +26,6 @@ class ProyectoController extends AbstractController
         ]);
     }
 
-    #[Route('/about', name: 'sym_about')]
-    public function about(){
-        return $this->render('about.view.html.twig',[
-        ]);
-    }
-
-    #[Route('/blog', name: 'sym_blog')]
-    public function blog(){
-        return $this->render('blog.view.html.twig');
-    }
-
     #[Route('/contact', name: 'sym_contact')]
     public function contact(){
         return $this->render('contact.view.html.twig');
