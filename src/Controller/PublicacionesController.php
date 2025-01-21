@@ -50,7 +50,7 @@ final class PublicacionesController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_publicaciones_edit', methods: ['GET', 'POST'])]
+    #[Route('/edit/{id}', name: 'app_publicaciones_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Publicaciones $publicacione, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(PublicacionesType::class, $publicacione);

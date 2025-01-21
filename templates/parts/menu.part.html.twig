@@ -9,53 +9,55 @@
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
             <div class="navbar-nav ml-auto p-4">
 
-            {# SI NO HAY USUARIO #}
                 {% if app.request.pathinfo=='/index' or app.request.pathinfo=='/' %}
                     <a href="/" class="nav-item nav-link active">Inicio</a>
                 {% else %}
                     <a href="/" class="nav-item nav-link">Inicio</a>
                 {% endif %}
+        
+            {% if is_granted('IS_AUTHENTICATED') %}
 
-                {% if app.request.pathinfo=='/contacto' %}
+                {% if app.request.pathinfo=='/publicaciones' %}
+                    <a href="/publicaciones" class="nav-item nav-link active">Publicaciones</a>
+                {% else %}
+                    <a href="/publicaciones" class="nav-item nav-link">Publicaciones</a>
+                {% endif %}
+
+                <a href="/mis-publicaciones/(ID_USUARIO)" class="nav-item nav-link">Mis Publicaciones</a>
+                
+                {% if app.request.pathinfo=='/publicaciones/new' %}
+                    <a href="/publicaciones/new" class="nav-item nav-link active">Crear</a>
+                {% else %}
+                    <a href="/publicaciones/new" class="nav-item nav-link">Crear</a>                   
+                {% endif %}
+
+                <a href="/perfil/(ID_USUARIO)" class="nav-item nav-link">Mi Perfil</a>
+                
+                <a href={{ path('app_logout') }} class="nav-item nav-link" >Cerrar sesión - {{ app.user.username }}</a>
+
+                {% if is_granted('IS_ADMIN') %}
+                    <a href="/lista-usuarios" class="nav-item nav-link">Lista Usuarios</a>
+                {% endif %}
+
+            {% else %}
+                {% if app.request.pathinfo=='/login' %}
+                    <a href={{ path('app_login') }} class="nav-item nav-link active">Iniciar sesión</a>
+                {% else %}
+                    <a href={{ path('app_login') }} class="nav-item nav-link">Iniciar sesión</a>
+                {% endif %}
+
+                {% if app.request.pathinfo=='/register' %}
+                    <a href={{ path('app_register') }} class="nav-item nav-link active">Registro</a>
+                {% else %}
+                    <a href={{ path('app_register') }} class="nav-item nav-link">Registro</a>
+                {% endif %}
+            {% endif %}
+
+            {% if app.request.pathinfo=='/contacto' %}
                     <a href="/contacto" class="nav-item nav-link active">Contacto</a>
                 {% else %}
                     <a href="/contacto" class="nav-item nav-link">Contacto</a>
-                {% endif %}
-
-                {% if app.request.pathinfo=='/iniciar-sesion' %}
-                    <a href="/iniciar-sesion" class="nav-item nav-link active">Iniciar Sesion</a>
-                {% else %}
-                    <a href="/iniciar-sesion" class="nav-item nav-link">Iniciar Sesion</a>
-                {% endif %}
-
-                {% if app.request.pathinfo=='/registro' %}
-                    <a href="/registro" class="nav-item nav-link active">Registro</a>
-                {% else %}
-                    <a href="/registro" class="nav-item nav-link">Registro</a>
-                {% endif %}
-        
-            {# SI HAY USUARIO #}
-                {# {% if app.request.pathinfo=='/index' or app.request.pathinfo=='/' %}
-                    <a href="/" class="nav-item nav-link active">Inicio</a>
-                {% else %}
-                    <a href="/" class="nav-item nav-link">Inicio</a>
-                {% endif %} #}
-
-                <a href="/publicaciones" class="nav-item nav-link">Publicaciones</a>
-
-                <a href="/publicaciones/new" class="nav-item nav-link">Crear</a>
-
-            {#
-                <a href="/contacto" class="nav-item nav-link">Contacto</a>
-
-                <a href="/mis-publicaciones/(ID_USUARIO)" class="nav-item nav-link">Mis Publicaciones</a>
-
-                <a href="/perfil/(ID_USUARIO)" class="nav-item nav-link">Mi Perfil</a>
-
-                <a href="/cerrar-sesion" class="nav-item nav-link">Cerrar Sesion (USUARIO)</a> #}
-
-            {# SI HAY ADMIN #}
-                {# <a href="/lista-usuarios" class="nav-item nav-link">Lista Usuarios</a> #}
+            {% endif %}
             </div>
         </div>
     </nav>

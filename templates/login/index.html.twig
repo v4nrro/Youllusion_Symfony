@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LoginController!
+{% endblock %}
+
+{% block body %}
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+
+        label{
+            margin-left: 2rem;
+        }
+
+        button{
+        }
+	</style>
+
+    <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
+		<div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
+			<h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Inicio de sesión</h1>
+		</div>
+	</div>
+
+	<div class="example-wrapper">
+		{% if error %}
+			<div class="etiqueta">{{ error.messageKey|trans(error.messageData, 'security') }}</div><br>
+		{% endif %}
+		<form action="{{ path('app_login') }}" method="post">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+			<label for="username">Usuario:</label>
+			<input type="text" id="username" name="_username" value="{{ last_username }}">
+			<label for="password">Password:</label>
+			<input type="password" id="password" name="_password">
+			{# If you want to control the URL the user is redirected to on success
+			 <input type="hidden" name="_target_path" value="/account"> #}
+			<button type="submit" class="btn btn-primary rounded">Iniciar sesión</button>
+		</form>
+	</div>
+{% endblock %}
