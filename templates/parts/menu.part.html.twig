@@ -35,7 +35,7 @@
                 
                 <a href={{ path('app_logout') }} class="nav-item nav-link" >Cerrar sesión - {{ app.user.username }}</a>
 
-                {% if is_granted('IS_ADMIN') %}
+                {% if app.user.roles[0] == "ROLE_ADMIN" %}
                     <a href="/lista-usuarios" class="nav-item nav-link">Lista Usuarios</a>
                 {% endif %}
 

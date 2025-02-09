@@ -15,7 +15,6 @@ class PublicacionesType extends AbstractType
             ->add('imagen')
             ->add('titulo')
             ->add('descripcion')
-            ->add('usuario')
         ;
     }
 

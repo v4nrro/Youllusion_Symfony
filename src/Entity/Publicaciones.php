@@ -22,8 +22,9 @@ class Publicaciones
     #[ORM\Column(length: 255)]
     private ?string $descripcion = null;
 
-    #[ORM\Column]
-    private ?int $usuario = null;
+    #[ORM\ManyToOne(inversedBy: 'publicaciones')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Usuarios $usuario = null;
 
     const RUTA_IMAGENES_SUBIDAS = "/images/publicaciones/";
 
@@ -68,19 +69,19 @@ class Publicaciones
         return $this;
     }
 
-    public function getUsuario(): ?int
+    public function getUrlSubidas(){
+        return self::RUTA_IMAGENES_SUBIDAS . $this->getImagen();
+    }
+
+    public function getUsuario(): ?Usuarios
     {
         return $this->usuario;
     }
 
-    public function setUsuario(int $usuario): static
+    public function setUsuario(?Usuarios $usuario): static
     {
         $this->usuario = $usuario;
 
         return $this;
-    }
-
-    public function getUrlSubidas(){
-        return self::RUTA_IMAGENES_SUBIDAS . $this->getImagen();
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UsuariosRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -32,6 +34,17 @@ class Usuarios implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    /**
+     * @var Collection<int, Publicaciones>
+     */
+    #[ORM\OneToMany(targetEntity: Publicaciones::class, mappedBy: 'usuario')]
+    private Collection $publicaciones;
+
+    public function __construct()
+    {
+        $this->publicaciones = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -106,5 +119,35 @@ class Usuarios implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, Publicaciones>
+     */
+    public function getPublicaciones(): Collection
+    {
+        return $this->publicaciones;
+    }
+
+    public function addPublicacione(Publicaciones $publicacione): static
+    {
+        if (!$this->publicaciones->contains($publicacione)) {
+            $this->publicaciones->add($publicacione);
+            $publicacione->setUsuario($this);
+        }
+
+        return $this;
+    }
+
+    public function removePublicacione(Publicaciones $publicacione): static
+    {
+        if ($this->publicaciones->removeElement($publicacione)) {
+            // set the owning side to null (unless already changed)
+            if ($publicacione->getUsuario() === $this) {
+                $publicacione->setUsuario(null);
+            }
+        }
+
+        return $this;
     }
 }
