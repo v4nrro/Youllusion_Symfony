@@ -16,28 +16,13 @@ class PublicacionesRepository extends ServiceEntityRepository
         parent::__construct($registry, Publicaciones::class);
     }
 
-    //    /**
-    //     * @return Publicaciones[] Returns an array of Publicaciones objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('p.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Publicaciones
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    /**
+     * @return Publicacion[] Returns an array of Publicacion objects
+     */
+    public function findLikeTitulo(string $value): array
+    {
+        $qb = $this->createQueryBuilder('i');
+        $qb->Where($qb->expr()->like('i.titulo', ':val'))->setParameter('val', '%' . $value . '%');
+        return $qb->getQuery()->getResult();
+    }
 }

@@ -16,6 +16,12 @@
 			<div class="section-title">
 				<h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Publicaciones de la Comunidad</h4>
 			</div>
+            <form action="{{ path('app_imagen_index_busqueda') }}" method="post">
+                <label>Búsqueda:</label>
+                <input type="text" name="busqueda" id="busqueda" value="">
+                <input type="submit" value="Buscar">
+            </form>
+
 			<div class="row">
 				{% for publicacione in publicaciones %}
 					<div class="col-lg-6 mb-5">
@@ -39,11 +45,12 @@
                                 <!-- Descripción -->
                                 <p class="m-0">{{publicacione.descripcion}}</p>
 
-                                {# Activar solo si es la publicación del propio usuario #}
-                                <div class="botones-tabla">
-								    <a href="{{ path('app_publicaciones_edit', {'id': publicacione.id}) }}" class="btn btn-primary font-weight-bold">Editar</a>
-                                    {{ include('publicaciones/_delete_form.html.twig') }}
-                                </div>
+                                {% if app.user.id == publicacione.usuario.id %}
+                                    <div class="botones-tabla">
+                                        <a href="{{ path('app_publicaciones_edit', {'id': publicacione.id}) }}" class="btn btn-primary font-weight-bold">Editar</a>
+                                        {{ include('publicaciones/_delete_form.html.twig') }}
+                                    </div>
+                                {% endif %}
 
 							</div>
 						</div>

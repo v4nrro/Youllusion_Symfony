@@ -23,7 +23,7 @@
                     <a href="/publicaciones" class="nav-item nav-link">Publicaciones</a>
                 {% endif %}
 
-                <a href="/mis-publicaciones/(ID_USUARIO)" class="nav-item nav-link">Mis Publicaciones</a>
+                <a href="/mis-publicaciones/{{app.user.id}}" class="nav-item nav-link">Mis Publicaciones</a>
                 
                 {% if app.request.pathinfo=='/publicaciones/new' %}
                     <a href="/publicaciones/new" class="nav-item nav-link active">Crear</a>
@@ -31,7 +31,7 @@
                     <a href="/publicaciones/new" class="nav-item nav-link">Crear</a>                   
                 {% endif %}
 
-                <a href="/perfil/(ID_USUARIO)" class="nav-item nav-link">Mi Perfil</a>
+                <a href="/perfil/{{app.user.id}}" class="nav-item nav-link">Mi Perfil</a>
                 
                 <a href={{ path('app_logout') }} class="nav-item nav-link" >Cerrar sesión - {{ app.user.username }}</a>
 

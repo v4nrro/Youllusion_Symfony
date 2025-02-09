@@ -26,11 +26,12 @@
                 <!-- Descripción -->
                 <p class="m-0">{{ publicacione.descripcion }}</p>
 
-                <!-- Borrar evento o editar si es mio -->
-                <div class="botones-tabla">
-                    <a href="{{ path('app_publicaciones_edit', {'id': publicacione.id}) }}" class="btn btn-primary font-weight-bold">Editar</a>
-                    {{ include('publicaciones/_delete_form.html.twig') }}
-                </div>
+                {% if app.user.id == publicacione.usuario.id %}
+                    <div class="botones-tabla">
+                        <a href="{{ path('app_publicaciones_edit', {'id': publicacione.id}) }}" class="btn btn-primary font-weight-bold">Editar</a>
+                        {{ include('publicaciones/_delete_form.html.twig') }}
+                    </div>
+                {% endif %}
 
             </div>
         </div>
