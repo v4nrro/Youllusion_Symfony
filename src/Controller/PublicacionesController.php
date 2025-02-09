@@ -22,12 +22,22 @@ final class PublicacionesController extends AbstractController
         ]);
     }
 
-    #[Route('/busqueda', name: 'app_imagen_index_busqueda', methods: ['POST'])]
+    #[Route('/busqueda', name: 'app_publicaciones_index_busqueda', methods: ['POST'])]
     public function busqueda(Request $request, PublicacionesRepository $publicacionesRepository): Response
     {
         $busqueda = $request->request->get('busqueda');
         $publicacione = $publicacionesRepository->findLikeTitulo($busqueda);
         return $this->render('publicaciones/index.html.twig', [
+            'publicaciones' => $publicacione
+        ]);
+    }
+
+    #[Route('/mis-publicaciones', name: 'app_publicaciones_mis_publicaciones', methods: ['GET'])]
+    public function misPublicaciones(PublicacionesRepository $publicacionesRepository): Response
+    {
+        $usuario = $this->getUser();
+        $publicacione = $publicacionesRepository->findLikeUsuario($usuario->getId());
+        return $this->render('publicaciones/mis-publicaciones.html.twig', [
             'publicaciones' => $publicacione
         ]);
     }

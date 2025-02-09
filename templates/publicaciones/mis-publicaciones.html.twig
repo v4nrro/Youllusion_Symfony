@@ -1,21 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Publicaciones index
+{% block title %}Mis Publicaciones
 {% endblock %}
 
 {% block body %}
 
 	<div class="container-fluid page-header mb-5 position-relative overlay-bottom">
 		<div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
-			<h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Publicaciones</h1>
+			<h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Mis Publicaciones</h1>
 		</div>
 	</div>
     
 	<div class="container-fluid pt-5">
 		<div class="container">
-			<div class="section-title">
-				<h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Publicaciones de la Comunidad</h4>
-			</div>
             <form action="{{ path('app_publicaciones_index_busqueda') }}" method="post">
                 <label>Búsqueda:</label>
                 <input type="text" name="busqueda" id="busqueda" value="">
@@ -45,7 +42,7 @@
                                 <!-- Descripción -->
                                 <p class="m-0">{{publicacione.descripcion}}</p>
 
-                                {% if app.user.id == publicacione.usuario.id or app.user.roles[0] == "ROLE_ADMIN" %}
+                                {% if app.user.id == publicacione.usuario.id %}
                                     <div class="botones-tabla">
                                         <a href="{{ path('app_publicaciones_edit', {'id': publicacione.id}) }}" class="btn btn-primary font-weight-bold">Editar</a>
                                         {{ include('publicaciones/_delete_form.html.twig') }}

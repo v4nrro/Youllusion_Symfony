@@ -25,4 +25,14 @@ class PublicacionesRepository extends ServiceEntityRepository
         $qb->Where($qb->expr()->like('i.titulo', ':val'))->setParameter('val', '%' . $value . '%');
         return $qb->getQuery()->getResult();
     }
+
+    public function findLikeUsuario($busqueda)
+    {
+        return $this->createQueryBuilder('p')
+            ->join('p.usuario', 'u') // Unimos con la tabla usuario
+            ->where('u.id = :busqueda')
+            ->setParameter('busqueda', $busqueda)
+            ->getQuery()
+            ->getResult();
+    }
 }
