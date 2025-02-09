@@ -31,13 +31,13 @@
                     <a href="/publicaciones/new" class="nav-item nav-link">Crear</a>                   
                 {% endif %}
 
-                <a href="/perfil/{{app.user.id}}" class="nav-item nav-link">Mi Perfil</a>
+                <a href="/usuarios/{{app.user.id}}" class="nav-item nav-link">Mi Perfil</a>
                 
-                <a href={{ path('app_logout') }} class="nav-item nav-link" >Cerrar sesión - {{ app.user.username }}</a>
-
                 {% if app.user.roles[0] == "ROLE_ADMIN" %}
-                    <a href="/lista-usuarios" class="nav-item nav-link">Lista Usuarios</a>
+                    <a href="/usuarios" class="nav-item nav-link">Lista Usuarios</a>
                 {% endif %}
+
+                <a href={{ path('app_logout') }} class="nav-item nav-link" >Cerrar sesión - {{ app.user.username }}</a>
 
             {% else %}
                 {% if app.request.pathinfo=='/login' %}
@@ -51,12 +51,6 @@
                 {% else %}
                     <a href={{ path('app_register') }} class="nav-item nav-link">Registro</a>
                 {% endif %}
-            {% endif %}
-
-            {% if app.request.pathinfo=='/contacto' %}
-                    <a href="/contacto" class="nav-item nav-link active">Contacto</a>
-                {% else %}
-                    <a href="/contacto" class="nav-item nav-link">Contacto</a>
             {% endif %}
             </div>
         </div>

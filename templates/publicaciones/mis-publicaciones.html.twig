@@ -13,12 +13,6 @@
     
 	<div class="container-fluid pt-5">
 		<div class="container">
-            <form action="{{ path('app_publicaciones_index_busqueda') }}" method="post">
-                <label>Búsqueda:</label>
-                <input type="text" name="busqueda" id="busqueda" value="">
-                <input type="submit" value="Buscar">
-            </form>
-
 			<div class="row">
 				{% for publicacione in publicaciones %}
 					<div class="col-lg-6 mb-5">

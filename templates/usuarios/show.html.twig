@@ -3,7 +3,11 @@
 {% block title %}Usuarios{% endblock %}
 
 {% block body %}
-    <h1>Usuarios</h1>
+    <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
+		<div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
+			<h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Datos de Usuario</h1>
+		</div>
+	</div>
 
     <table class="table">
         <tbody>
@@ -26,9 +30,11 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_usuarios_index') }}">back to list</a>
+    {% if app.user.roles[0] == "ROLE_ADMIN" %}
+        {{ include('usuarios/_delete_form.html.twig') }}
+    {% endif %}
 
-    <a href="{{ path('app_usuarios_edit', {'id': usuario.id}) }}">edit</a>
+    
+    <a class="btn btn-primary m-4" href="{{ path('app_usuarios_index') }}">Volver</a>
 
-    {{ include('usuarios/_delete_form.html.twig') }}
 {% endblock %}

@@ -22,9 +22,4 @@ class ProyectoController extends AbstractController
            'publicaciones' => $publicaciones
         ]);
     }
-
-    #[Route('/contact', name: 'sym_contact')]
-    public function contact(){
-        return $this->render('contact.view.html.twig');
-    }
 }
