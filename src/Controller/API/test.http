@@ -1,0 +1,37 @@
+### Petición GET
+GET http://youllusionsymfony.local/api/prueba
+Content-Type: application/json
+
+### GET de todas las publicaciones
+GET http://youllusionsymfony.local/api/publicacionesapi
+Content-Type: application/json
+
+### GET de una publicación
+GET http://youllusionsymfony.local/api/publicacionesapi/2
+Content-Type: application/json
+
+### Send POST request with json body
+POST http://youllusionsymfony.local/api/publicacionesapinueva
+Content-Type: application/json
+
+{
+ "titulo": "imagen post 1",
+ "descripcion": "esta es la imagen post 1",
+ "imagen": "una imagen",
+ "usuario": "1"
+}
+
+### DELETE de una imagen
+DELETE http://youllusionsymfony.local/api/publicacionesapi/4
+Content-Type: application/json
+
+### PUT de actualización de una imagen
+PUT http://youllusionsymfony.local/api/publicacionesapi/2
+Content-Type: application/json
+
+{
+ "titulo": "imagen actualizada",
+ "descripcion": "esta es la imagen actualizada",
+ "imagen": "una imagen actualizada",
+ "usuario": "1"
+}

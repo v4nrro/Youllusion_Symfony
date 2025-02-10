@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class PublicacionesType extends AbstractType
 {
@@ -25,11 +26,19 @@ class PublicacionesType extends AbstractType
                                 'image/jpeg',
                                 'image/png',
                             ], 
-                        'mimeTypesMessage' => 'Por favor, seleccione un archivo jpg o png',
+                        'mimeTypesMessage' => 'Por favor, seleccione un archivo jpg o png'
                     ])
                 ]])
-            ->add('titulo')
-            ->add('descripcion')
+            ->add('titulo', TextType::class, [
+                'label' => 'Titulo',
+                'required' => true,
+                'label_attr' => ['class' => 'etiqueta']
+            ])
+            ->add('descripcion', TextType::class, [
+                'label' => 'Descripción',
+                'required' => true,
+                'label_attr' => ['class' => 'etiqueta']
+            ])
         ;
     }
 

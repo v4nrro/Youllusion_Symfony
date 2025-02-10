@@ -11,6 +11,9 @@ security:
                 property: username
         # used to reload user from session & other features (e.g. switch_user)
     firewalls:
+        api:
+            pattern: ^/api
+            stateless: true
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
@@ -37,10 +40,10 @@ security:
         # - { path: ^/profile, roles: ROLE_USER }
 
       # Necesario ROLE_ADMIN el acceso a /imagen*
-        - { path: ^/imagen/new, roles: ROLE_ADMIN }
-        - { path: ^/imagen/edit, roles: ROLE_ADMIN }
-        - { path: ^/imagen/delete, roles: ROLE_ADMIN }
-        - { path: ^/imagen/busqueda, roles: ROLE_USER }
+        - { path: ^/api, roles: PUBLIC_ACCESS }
+        - { path: ^/usuarios/, roles: ROLE_USER }
+        - { path: ^/usuarios, roles: ROLE_ADMIN }
+        - { path: ^/publicaciones, roles: ROLE_USER }
         - { path: ^/register, roles: PUBLIC_ACCESS }
 
         # allow unauthenticated users to access the login form

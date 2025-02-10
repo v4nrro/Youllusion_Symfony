@@ -28,18 +28,16 @@ class PublicacionesApiController extends BaseApiController
         return $this->getResponse($publicaciones, Response::HTTP_CREATED);
     }
 
-    #[Route('/publicaionesapi/{id}', name: 'api_get_publicacion', requirements: ['id' => '\d+'], methods: ['GET'])]
+    #[Route('/publicacionesapi/{id}', name: 'api_get_publicacion', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function getOne(Publicaciones $publicacion, PublicacionesBLL $publicacionBLL)
     {
         return $this->getResponse($publicacionBLL->toArray($publicacion));
     }
 
     #[Route('/publicacionesapi', name: 'api_get_publicaciones', methods: ['GET'])]
-    #[Route('/publicacionesapi/ordenadas/{order}', name: 'api_get_publicaciones_ordenadas', methods: ['GET'])]
-    public function getAll(Request $request, PublicacionesBLL $publicacionBLL, $order = 'id')
+    public function getAll(PublicacionesBLL $publicacionBLL)
     {
-        $titulo = $request->query->get('titulo');
-        $publicaciones = $publicacionBLL->getPublicaciones($order, $titulo);
+        $publicaciones = $publicacionBLL->getPublicaciones('');
         return $this->getResponse($publicaciones);
     }
 

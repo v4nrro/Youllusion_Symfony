@@ -25,12 +25,10 @@ class PublicacionesBLL extends BaseBLL
         $this->security = $security;
     }
 
-    public function getPublicaciones(?string $order, ?string $titulo,)
+    public function getPublicaciones(?string $titulo)
     {
-        $publicaciones = $this->em->getRepository(Publicaciones::class)->findPublicaciones(
-            $order,
-            $titulo,
-            $usuario = null
+        $publicaciones = $this->em->getRepository(Publicaciones::class)->findLikeTitulo(
+            $titulo
         );
         return $this->entitiesToArray($publicaciones);
     }
@@ -49,16 +47,16 @@ class PublicacionesBLL extends BaseBLL
         return $this->guardaValidando($publicacion);
     }
 
-    public function toArray(Publicaciones $imagen)
+    public function toArray(Publicaciones $publicacion)
     {
-        if (is_null($imagen))
+        if (is_null($publicacion))
             return null;
         return [
-            'id' => $imagen->getId(),
-            'titulo' => $imagen->getTitulo(),
-            'imagen' => $imagen->getImagen(),
-            'descripcion' => $imagen->getDescripcion(),
-            'usuario' => $imagen->getUsuario()->getId()
+            'id' => $publicacion->getId(),
+            'titulo' => $publicacion->getTitulo(),
+            'imagen' => $publicacion->getImagen(),
+            'descripcion' => $publicacion->getDescripcion(),
+            'usuario' => $publicacion->getUsuario()->getId()
         ];
     }
 }
